@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 来源与知识纠正"
+  short_description: "追踪结论来源与派生关系，让纠正影响下游并保留有效内容"
+  default_prompt: "使用 $ai-work-knowledge 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true

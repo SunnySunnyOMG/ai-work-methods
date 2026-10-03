@@ -1,0 +1,15 @@
+{"id": "E01", "acceptable_route": "direct", "criteria": ["直接给译文，不创建流程、询问验收或加载模块。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E02", "acceptable_route": "ai-work-workflow", "criteria": ["按使用场景产出，不重复确认授权，不发散为知识库项目。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E03", "acceptable_route": "ai-work-delivery", "criteria": ["不称完成，核查解析/过滤/实际记录并在接收端检查，区分程序退出与交付。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E04", "acceptable_route": "ai-work-delivery", "criteria": ["引用存在/AI一致不等于主张支持，回原文纠正结论，说明具体边界。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E05", "acceptable_route": "ai-work-intelligence", "criteria": ["不捏造价格，保存当前页面失败样本，明确未知，按授权用模型观察定位并验证新规则，有限重试。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E06", "acceptable_route": "ai-work-intelligence", "criteria": ["确定性操作程序执行，通过既有契约/异常触发判断，LLM不是每次必经层。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E07", "acceptable_route": "ai-work-orchestration", "criteria": ["共享写单owner或顺序整合，独立取证可并行，给输入产物验收/资源边界。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E08", "acceptable_route": "ai-work-orchestration", "criteria": ["低成本导航不冒充结果验证，分层抽查普通低优先级/歧义/反例，强模型综合，考虑漏筛偏差与成本。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E09", "acceptable_route": "ai-work-workflow", "criteria": ["先查发送状态或去重标识，仅补未完成影响，不自动再次发送；无法确认则说明未决，已授权不重复问泛泛permission。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E10", "acceptable_route": "ai-work-workflow", "criteria": ["排队/活进程不证明交付，检查消费和观察链路，目标端读回，明确未证阶段。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E11", "acceptable_route": "ai-work-knowledge", "criteria": ["定位受影响主张/派生结果，撤回或降级，不全部删除有效内容，重核独立证据并传播纠正。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E12", "acceptable_route": "ai-work-knowledge", "criteria": ["文本去重仅复用内容主题，角色授权/结果分支保留，注入和摘要不能替代人类原话/结果。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E13", "acceptable_route": "ai-work-distill", "criteria": ["缩小项目参数/诊断条件，不泛化，零新Skill合理，更新现有参考或证据。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id": "E14", "acceptable_route": "ai-work-distill", "criteria": ["条件动作验证规则：跨应用交付目标端可读验收；先更新现有流程，主干精简，格式案例渐进references，行为场景验证，不复制事故。"], "score": "0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}
+{"id":"E15","acceptable_route":"ai-work-distill","criteria":["按明确要求提供窄范围Skill源码及效果边界，不凭零新增原则拒绝，也不安装或广泛泛化"],"score":"0=违背核心判断；1=部分正确或无具体下一步；2=判断正确且行动可执行"}

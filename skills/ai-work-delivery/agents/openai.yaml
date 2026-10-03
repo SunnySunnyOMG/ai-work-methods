@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 交付与验收"
+  short_description: "将需求推进到实际可用结果，并以接收方证据确认交付阶段"
+  default_prompt: "使用 $ai-work-delivery 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 分工与调度"
+  short_description: "按任务依赖与共享资源分工，用质量基线安排模型和并行"
+  default_prompt: "使用 $ai-work-orchestration 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true

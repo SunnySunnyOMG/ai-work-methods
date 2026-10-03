@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 工作方法入口"
+  short_description: "按任务当前瓶颈选择工作方法，只加载实际需要的模块和资料"
+  default_prompt: "使用 $ai-work 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true

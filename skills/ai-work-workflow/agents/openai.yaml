@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 可持续工作流"
+  short_description: "围绕真实用途形成最小工作流，核对状态后恢复未完成影响"
+  default_prompt: "使用 $ai-work-workflow 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true

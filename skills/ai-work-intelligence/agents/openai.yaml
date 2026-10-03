@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 与程序边界"
+  short_description: "按歧义和错误代价划分AI与程序，稳定流程保留例外入口"
+  default_prompt: "使用 $ai-work-intelligence 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true

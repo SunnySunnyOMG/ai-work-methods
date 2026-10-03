@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI 经验与 Skill 化"
+  short_description: "将经验转成有条件的行动规则，按需封装紧凑技能与参考资料"
+  default_prompt: "使用 $ai-work-distill 帮我完成当前任务，只加载实际需要的方法与资料。"
+policy:
+  allow_implicit_invocation: true
