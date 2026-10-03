@@ -2,32 +2,45 @@
 
 [中文](README.zh-CN.md) · [Seven principles](docs/methods.md) · [Sources](docs/sources.md)
 
-Small skills for turning AI assistance into usable work: choose what to automate, provide the right context, divide independent tasks, verify results, recover safely, and reuse experience.
+An Agent Skills package for Codex, Claude Code, and other compatible AI agents. Small skills for turning AI assistance into usable work: choose what to automate, provide the right context, divide independent tasks, verify results, recover safely, and reuse experience.
 
 One entry skill routes to six focused skills. Each has a short core and loads references only when relevant. Simple requests proceed directly; complex tasks get the method they need. The skill bodies are currently Chinese, with English discovery descriptions; an English translation is not included.
 
 ## Quick install
 
-Run in the project where you want the skills available. Requires Node.js **22.20.0+** and npm for this installer:
+Run the command for your agent in the target project. Both commands require Node.js **22.20.0+** and npm:
 
 ```sh
-npx --yes skills@1.7.0 add SunnySunnyOMG/ai-work-methods --skill '*' --agent codex --copy --yes
+# Codex
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent codex --copy --yes
+
+# Claude Code
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent claude-code --copy --yes
 ```
 
-Install all seven together: the entry uses relative links to sibling skills. The command targets Codex, copies files, and uses the repository's current default branch. For a reproducible release, replace the source with `https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.0`. Add `--global` for user-wide installation; use `--agent claude-code` to target Claude Code. These options come from the [skills CLI](https://github.com/vercel-labs/skills).
+Install all seven together: the entry uses relative links to sibling skills. These commands copy the pinned v0.1.1 release into the project. To follow the current default branch instead, use `SunnySunnyOMG/ai-work-methods` as the source. Add `--global` for user-wide installation. Copied skills do not update automatically; back up local edits before installing another version. Options come from the [skills CLI](https://github.com/vercel-labs/skills).
 
-[Other installation methods, updates, and troubleshooting](docs/install.md) include a Codex installer prompt and manual copying without Node. Loading these files requires no provider API integration; the agent still needs its own working runtime. Python 3.9+ is needed only for the optional helpers.
+[Installation, updates, and troubleshooting](docs/install.md) include manual copying without Node. Loading these files requires no extra provider API integration; the agent needs its own working runtime. Python 3.9+ is needed only for the optional helpers. The Claude instructions target **Claude Code**; Claude Desktop/Cowork and direct API use have different installation and integration paths.
 
 ## Use
 
-In Codex CLI or IDE, invoke the installed entry with a real task:
+Invoke the installed entry with a real task. In Codex CLI or IDE:
 
 ```text
 $ai-work Compare these two proposals and produce a decision memo.
 Use the attached sources, flag contradictions, and deliver the memo as a file.
 ```
 
-Or invoke a focused skill directly. Other hosts may use different invocation syntax. If the new skills do not appear, restart the host; see [Codex discovery documentation](https://learn.chatgpt.com/docs/build-skills).
+In Claude Code:
+
+```text
+/ai-work Compare these two proposals and produce a decision memo.
+Use the attached sources, flag contradictions, and deliver the memo as a file.
+```
+
+Or invoke a focused skill directly. Both hosts can select relevant skills from their discovery descriptions; actual implicit selection depends on the host and task. Claude Code allows both user and model invocation by default. If the skills do not appear, check the installation scope and host settings; see [Codex](https://learn.chatgpt.com/docs/build-skills) and [Claude Code](https://code.claude.com/docs/en/skills) documentation. Other compatible hosts have their own locations and invocation syntax.
+
+For another AI agent, use its supported skill mechanism. If it can read local files, ask it to read `skills/ai-work/SKILL.md` and give it the task, for example: “Reconcile these meeting notes with the original sources, flag changed claims, and deliver a corrected brief.” If it cannot read files, supply the entry and relevant module text in the conversation. This provides context; it does not guarantee automatic discovery or grant tool access.
 
 | Skill | Use it to… |
 | --- | --- |

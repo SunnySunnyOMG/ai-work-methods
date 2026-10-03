@@ -2,27 +2,41 @@
 
 [English](README.md) · [七条原则](docs/methods.md) · [来源](docs/sources.md)
 
-帮助使用 AI 工作的人完成几个关键判断：哪些部分适合自动化、需要什么上下文、怎样分工、如何验收、失败后从哪里继续，以及经验怎样影响下次行动。
+适用于 Codex、Claude Code 及其他兼容 AI Agent 的 Agent Skills 方法包，帮助使用 AI 工作的人完成几个关键判断：哪些部分适合自动化、需要什么上下文、怎样分工、如何验收、失败后从哪里继续，以及经验怎样影响下次行动。
 
 一个统一入口，六个短主干 Skill，细节按条件渐进加载。简单任务直接完成，复杂任务按当前瓶颈选择方法。Skill 正文为中文，发现描述为英文。
 
 ## 快速安装
 
-在目标项目目录执行，需要 Node.js **22.20.0+** 和 npm：
+在目标项目目录选择对应命令，需要 Node.js **22.20.0+** 和 npm：
 
 ```sh
-npx --yes skills@1.7.0 add SunnySunnyOMG/ai-work-methods --skill '*' --agent codex --copy --yes
+# Codex
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent codex --copy --yes
+
+# Claude Code
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent claude-code --copy --yes
 ```
 
-建议七个一起安装，入口通过相对链接读取兄弟模块。这个命令使用默认分支；固定首版可把源替换为 `https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.0`。用户级安装加 `--global`；Claude Code 使用 `--agent claude-code`。选项依据 [skills CLI](https://github.com/vercel-labs/skills)。[其他安装方式](docs/install.md)包含 Codex 内置安装器和无需 Node 的手动复制。
+七个一起安装，入口通过相对链接读取兄弟模块。上述命令复制固定版本 v0.1.1 到项目。若要跟随默认分支，可将源替换为 `SunnySunnyOMG/ai-work-methods`。用户级安装加 `--global`。复制安装不会自动更新；升级前备份本地修改。选项依据 [skills CLI](https://github.com/vercel-labs/skills)。[安装与更新说明](docs/install.md)包含无需 Node 的手动复制和 Codex 内置安装器。
 
-安装后，在 Codex CLI 或 IDE 中输入：
+在 Codex CLI 或 IDE 中输入：
 
 ```text
 $ai-work 把这两份材料整理成供团队决策的报告，保留来源，核对冲突，并交付文件。
 ```
 
-新技能未出现时重启宿主，参见 [Codex 文档](https://learn.chatgpt.com/docs/build-skills)。其他宿主的调用语法可能不同。加载 Skill 不需要额外接入模型 API，Agent 需要自己的可用运行环境；只有可选脚本需要 Python 3.9+。
+在 Claude Code 中输入：
+
+```text
+/ai-work 把这两份材料整理成供团队决策的报告，保留来源，核对冲突，并交付文件。
+```
+
+也可以直接调用专题 Skill。两个宿主均可依据发现描述选择相关技能，实际隐式选择取决于宿主与任务；Claude Code 默认允许用户与模型调用。新技能未出现时检查安装范围和宿主设置，参见 [Codex](https://learn.chatgpt.com/docs/build-skills) 与 [Claude Code](https://code.claude.com/docs/en/skills) 文档。其他兼容宿主有自己的目录和调用方式。
+
+加载 Skill 无需额外接入模型 API，Agent 仍需要自己的可用运行环境；可选脚本需要 Python 3.9+。这里的 Claude 安装与调用说明针对 **Claude Code**；Claude Desktop/Cowork 和直接 API 使用采用各自的接入方式。
+
+其他 AI Agent 可使用自己的技能机制。环境能读本地文件时，可要求它读取 `skills/ai-work/SKILL.md` 并给出任务，例如：“把会议笔记与原始来源对照，标出发生变化的主张，交付修正后的简报。”不能读文件时，把入口及相关模块正文放入对话上下文。这只提供方法上下文，不保证自动发现，也不赋予工具权限。
 
 | Skill | 主要判断 |
 | --- | --- |
