@@ -1,56 +1,75 @@
-# Installation
+# Install in your agent
 
-This is an Agent Skills package for compatible AI agents. The package contains seven sibling skill directories. Keep their names and relative layout intact; installing only `ai-work` breaks its routes.
+The package uses the [Agent Skills open format](https://agentskills.io/specification). Install the same seven sibling folders in any compatible host; there is no provider API dependency or vendor-specific method implementation. The host determines discovery, destination, invocation and tool permissions.
 
-## CLI
+## 1. Let an installer handle the destination
 
-Run the command for your host from the target project. These commands install the pinned v0.1.1 release:
+From the target project, run:
 
 ```sh
-# Codex
-npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent codex --copy --yes
-
-# Claude Code
-npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent claude-code --copy --yes
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --copy
 ```
 
-Use `SunnySunnyOMG/ai-work-methods` as the source to follow the default branch, or choose an already published tag. Use `--global` for user scope. Use `--list` to inspect available skills without installing. The [CLI documentation](https://github.com/vercel-labs/skills) defines source formats and options. Version 1.7.0 is the documented installer pin; Node.js 22.20.0+ and npm are installer prerequisites. Check the install output for all seven names.
+Requires Node.js 22.20.0+ and npm for the installer only. An ordinary interactive terminal offers agent/scope choices and an installation summary. Inside an agent environment, the installer may detect the host and proceed non-interactively. Review the actual destination paths and install all seven skills; use explicit `--agent` targets when detection is not what you want. The first `--yes` belongs to npx, allowing it to obtain the installer; a trailing installer `--yes` additionally accepts its choices. Some targets share a `.agents/skills/` directory; that path is not a guarantee that every agent reads it.
 
-## Codex built-in installer
+The [pinned installer documentation](https://github.com/vercel-labs/skills/tree/v1.7.0#supported-agents) lists available targets, including OpenCode, Cursor, Gemini CLI, GitHub Copilot, Claude Code and Codex. An installer target means it can place files in a known location; it does not mean this package's native discovery or behavior has been tested in every target.
 
-If your Codex environment provides `$skill-installer`, give it this explicit prompt:
+For non-interactive installation, use `--agent` to explicitly select one or more targets and a trailing `--yes` to accept the installer choices. For example:
+
+```sh
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent opencode cursor --copy --yes
+```
+
+Replace the target names with those you use. Add `--global` for user scope; otherwise use project scope. Use `--list` to inspect the seven available skills without installing. Do not use `--all` unless you actually want the installer's all-agent behavior.
+
+The commands pin v0.1.1. Use another published tag to choose another version. Using `SunnySunnyOMG/ai-work-methods` as the source copies the default branch at installation time; it does not enable automatic updates.
+
+## 2. Manual installation without Node or a listed target
+
+1. Download the [v0.1.1 source archive](https://github.com/SunnySunnyOMG/ai-work-methods/archive/refs/tags/v0.1.1.zip) or clone that tag.
+2. Find your host's documented skills directory or import mechanism. Agent Skills defines the format, not a universal project/user path. Record the chosen destination and check same-name conflicts before writing.
+3. Copy the **seven directories inside `skills/`** into that directory. Preserve names, resources and sibling layout:
 
 ```text
-$skill-installer Install all seven skills from SunnySunnyOMG/ai-work-methods at tag v0.1.1:
-skills/ai-work
-skills/ai-work-workflow
-skills/ai-work-intelligence
-skills/ai-work-orchestration
-skills/ai-work-delivery
-skills/ai-work-knowledge
-skills/ai-work-distill
-Keep their references and scripts intact, and report the installation destination.
+<your-host-skills-directory>/
+  ai-work/SKILL.md
+  ai-work-workflow/SKILL.md
+  ai-work-intelligence/SKILL.md
+  ai-work-orchestration/SKILL.md
+  ai-work-delivery/SKILL.md
+  ai-work-knowledge/SKILL.md
+  ai-work-distill/SKILL.md
 ```
 
-This is an alternative installer request, not a guarantee that every host bundles the installer. Follow its conflict handling if a same-name skill already exists.
+Keep each folder's `references/`, `scripts/` and optional `agents/` files. Installing only the entry breaks its sibling routes. The package needs access to these sibling files; a host that imports skills into isolated containers may require an adapter and is not established as compatible merely by accepting an upload.
 
-## Manual installation without Node
+If the host has no skills discovery but can read files, keep the downloaded `skills/` tree intact and ask it to read `skills/ai-work/SKILL.md`, then give it your task. If it cannot read files, provide the entry and needed module/reference text in its context. This supplies the methods, not automatic installation, discovery or tool access. Web apps and APIs may have their own upload/integration mechanisms; a local copy does not automatically configure them.
 
-Download the tagged source archive or clone the repository at a published tag such as `v0.1.1`. Copy the **seven directories inside `skills/`**, including their references and scripts. Keep the sibling layout intact and inspect existing same-name directories before replacing anything.
+## 3. Check the installed package
 
-| Host | Project directory | Manual user directory | Explicit entry |
-| --- | --- | --- | --- |
-| Codex CLI / IDE | `.agents/skills/` | `~/.agents/skills/` | `$ai-work` |
-| Claude Code | `.claude/skills/` | `~/.claude/skills/` | `/ai-work` |
+- Confirm all seven folders and their resources are present.
+- Use the host's own invocation syntax or ask it to load the entry. Give it a small real task and inspect the actual output before relying on implicit selection.
+- Check that required references can be read relative to the installed skill, rather than resolving paths from an unrelated working directory.
+- If discovery fails, check the destination, scope, settings and the host's reload procedure. Optional Python helpers require Python 3.9+; reading the methods does not require Python.
 
-The pinned skills CLI uses `CODEX_HOME/skills` (default `~/.codex/skills/`) for Codex global installs; the manual directory above follows current OpenAI discovery guidance. Record the actual installer destination, especially when mixing installation methods. Claude Code global CLI installs use `CLAUDE_CONFIG_DIR/skills` when configured, otherwise `~/.claude/skills/`. See the [pinned installer implementation](https://github.com/vercel-labs/skills/blob/v1.7.0/src/agents.ts).
+Implicit selection is permitted by this package, but the host decides when to use it. `agents/openai.yaml` is optional host metadata; the core does not depend on that file. The package does not disable Claude Code model invocation or prescribe a model/provider.
 
-[Codex documentation](https://learn.chatgpt.com/docs/build-skills) describes local discovery and `$` invocation. [Claude Code documentation](https://code.claude.com/docs/en/skills) describes its directories, `/skill-name` invocation, and default user/model access. This package does not disable model invocation, so Claude Code may select it when relevant; this is permission to select, not a guarantee that a task will trigger it. Codex presentation metadata in `agents/openai.yaml` is optional for other hosts.
+## Optional host examples
 
-Start with an explicit invocation to distinguish discovery problems from implicit matching. Check that all seven directories exist and that your host settings permit skills. Codex detects local changes; if they do not appear, restart it. These Claude instructions target **Claude Code**, not Claude Desktop/Cowork or direct Anthropic API requests, which have their own integration paths. Other Agent Skills hosts have their own locations and invocation syntax; behavior across all hosts has not been validated.
+These illustrate host conventions rather than define the portable format:
+
+| Host | Explicit entry | Project/manual-user examples |
+| --- | --- | --- |
+| Codex | `$ai-work` | `.agents/skills/`, `~/.agents/skills/` |
+| Claude Code | `/ai-work` | `.claude/skills/`, `~/.claude/skills/` |
+| Other compatible hosts | Their own skill invocation or file-loading mechanism | Their documented directory/import mechanism |
+
+See [Codex documentation](https://learn.chatgpt.com/docs/build-skills) and [Claude Code documentation](https://code.claude.com/docs/en/skills). The pinned CLI's user destination for Codex defaults to `~/.codex/skills/`, while manual discovery documentation also supports `~/.agents/skills/`. Configured `CODEX_HOME` or `CLAUDE_CONFIG_DIR` can affect CLI destinations; inspect the summary and [pinned destination implementation](https://github.com/vercel-labs/skills/blob/v1.7.0/src/agents.ts), and avoid duplicate same-name copies across scopes.
+
+If your host includes a skill installer, ask it to install **all seven** `skills/ai-work*` folders from this repository at the chosen tag, preserve resources and sibling layout, and report the actual destination. No particular built-in installer is required.
 
 ## Updating and removing
 
-Copied installations do not update automatically. Before upgrading, record the current version and actual destination, and back up any local edits outside those seven directories. Compare your edits with the new release before reinstalling; do not assume the installer merges them. Then install a selected published tag using the same scope, agent, and all-seven selection, and check all seven names. A copied installation is independent of the source checkout. Use your installer's removal command or remove only the seven package directories from the recorded destination. Avoid duplicate same-name installations at multiple scopes.
+Copied installations do not update automatically. Before upgrading, record the current version and actual destination, and back up local edits outside those seven directories. Compare your edits with the new release; do not assume an installer merges them. Install a chosen published tag using the same scope and all-seven selection, and recheck the installed package. Symlinking copies across host directories can share a local source but does not itself fetch future releases.
 
-The installation commands above write to the chosen skill location. The optional Python helpers remain read-only. No user-wide installation is required to use or validate the repository itself.
+Use your installer's removal command or remove only the seven package folders from the recorded destination. Installing or removing in a project is separate from user-wide scope. The optional helpers remain read-only; installation writes the chosen destination.

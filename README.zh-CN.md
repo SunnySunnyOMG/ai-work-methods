@@ -2,41 +2,35 @@
 
 [English](README.md) · [七条原则](docs/methods.md) · [来源](docs/sources.md)
 
-适用于 Codex、Claude Code 及其他兼容 AI Agent 的 Agent Skills 方法包，帮助使用 AI 工作的人完成几个关键判断：哪些部分适合自动化、需要什么上下文、怎样分工、如何验收、失败后从哪里继续，以及经验怎样影响下次行动。
+遵循 [Agent Skills 开放规范](https://agentskills.io/specification) 的通用方法包，帮助使用 AI 工作的人完成几个关键判断：哪些部分适合自动化、需要什么上下文、怎样分工、如何验收、失败后从哪里继续，以及经验怎样影响下次行动。
 
 一个统一入口，六个短主干 Skill，细节按条件渐进加载。简单任务直接完成，复杂任务按当前瓶颈选择方法。Skill 正文为中文，发现描述为英文。
 
-## 快速安装
+## 安装
 
-在目标项目目录选择对应命令，需要 Node.js **22.20.0+** 和 npm：
+在目标项目目录运行，让安装工具检测环境或提供 Agent 选择，并展示安装位置；方法包本身不要求特定供应商：
 
 ```sh
-# Codex
-npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent codex --copy --yes
-
-# Claude Code
-npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent claude-code --copy --yes
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --copy
 ```
 
-七个一起安装，入口通过相对链接读取兄弟模块。上述命令复制固定版本 v0.1.1 到项目。若要跟随默认分支，可将源替换为 `SunnySunnyOMG/ai-work-methods`。用户级安装加 `--global`。复制安装不会自动更新；升级前备份本地修改。选项依据 [skills CLI](https://github.com/vercel-labs/skills)。[安装与更新说明](docs/install.md)包含无需 Node 的手动复制和 Codex 内置安装器。
+这个安装工具需要 Node.js **22.20.0+** 和 npm。普通交互终端按提示选择 Agent 和范围；在 Agent 内运行时，安装工具可能自动识别当前宿主并直接安装。核对输出的目标位置；指定目标用 `--agent`，用户级范围用 `--global`。开头的 `npx --yes` 只接受下载安装工具；末尾另加安装器的 `--yes` 才是接受其安装选项。七个兄弟 Skill 一起安装；复制件不会自动更新。
 
-在 Codex CLI 或 IDE 中输入：
+没有 Node，或安装工具没有列出你的 Agent？下载版本源码，将 **`skills/` 内的七个文件夹**放入该 Agent 文档指定的技能目录，保留名称、references、scripts 和兄弟布局。Agent Skills 统一的是文件格式，不是所有宿主的安装路径。[安装说明](docs/install.md)提供通用手动流程、更新方式和可选宿主命令；[skills CLI](https://github.com/vercel-labs/skills/tree/v1.7.0#supported-agents) 可处理多种宿主目录，但目录安装支持不等于所有宿主行为都已验证。
+
+## 使用
+
+给 Agent 真实任务，并让它使用 **ai-work**，例如：
 
 ```text
-$ai-work 把这两份材料整理成供团队决策的报告，保留来源，核对冲突，并交付文件。
+使用 ai-work，把这两份材料整理成供团队决策的报告，保留来源，核对冲突，并交付文件。
 ```
 
-在 Claude Code 中输入：
+使用宿主自己的 Skill 调用或发现机制。能读本地文件时，读取 `skills/ai-work/SKILL.md`，再按需要加载兄弟模块与 references。不能加载 Skill 或文件时，将入口及所需模块/reference 内容放入上下文；这是手动使用方法，不等于已安装并能自动发现。
 
-```text
-/ai-work 把这两份材料整理成供团队决策的报告，保留来源，核对冲突，并交付文件。
-```
+可选调用例子：Codex 使用 `$ai-work`，Claude Code 使用 `/ai-work`；其他 Agent 使用自己的语法与设置。包允许按相关性隐式选择，实际是否触发由宿主和任务决定。`agents/openai.yaml` 仅是可选宿主元数据，核心方法不依赖它。
 
-也可以直接调用专题 Skill。两个宿主均可依据发现描述选择相关技能，实际隐式选择取决于宿主与任务；Claude Code 默认允许用户与模型调用。新技能未出现时检查安装范围和宿主设置，参见 [Codex](https://learn.chatgpt.com/docs/build-skills) 与 [Claude Code](https://code.claude.com/docs/en/skills) 文档。其他兼容宿主有自己的目录和调用方式。
-
-加载 Skill 无需额外接入模型 API，Agent 仍需要自己的可用运行环境；可选脚本需要 Python 3.9+。这里的 Claude 安装与调用说明针对 **Claude Code**；Claude Desktop/Cowork 和直接 API 使用采用各自的接入方式。
-
-其他 AI Agent 可使用自己的技能机制。环境能读本地文件时，可要求它读取 `skills/ai-work/SKILL.md` 并给出任务，例如：“把会议笔记与原始来源对照，标出发生变化的主张，交付修正后的简报。”不能读文件时，把入口及相关模块正文放入对话上下文。这只提供方法上下文，不保证自动发现，也不赋予工具权限。
+方法包无需额外接入供应商 API。Agent 需要自己的运行环境与材料访问能力；只有可选脚本需要 Python 3.9+。桌面端、网页端和直接 API 可能采用上传或专门接入方式，而非本地技能目录，按各自说明处理。
 
 | Skill | 主要判断 |
 | --- | --- |

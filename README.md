@@ -2,45 +2,36 @@
 
 [中文](README.zh-CN.md) · [Seven principles](docs/methods.md) · [Sources](docs/sources.md)
 
-An Agent Skills package for Codex, Claude Code, and other compatible AI agents. Small skills for turning AI assistance into usable work: choose what to automate, provide the right context, divide independent tasks, verify results, recover safely, and reuse experience.
+A portable [Agent Skills](https://agentskills.io/specification) package for compatible AI agents. Small skills for turning AI assistance into usable work: choose what to automate, provide the right context, divide independent tasks, verify results, recover safely, and reuse experience.
 
 One entry skill routes to six focused skills. Each has a short core and loads references only when relevant. Simple requests proceed directly; complex tasks get the method they need. The skill bodies are currently Chinese, with English discovery descriptions; an English translation is not included.
 
-## Quick install
+## Install
 
-Run the command for your agent in the target project. Both commands require Node.js **22.20.0+** and npm:
+Run in the project where you want the skills. The installer detects the environment or offers agent selection and shows the destinations; the package itself does not require a particular provider:
 
 ```sh
-# Codex
-npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent codex --copy --yes
-
-# Claude Code
-npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --agent claude-code --copy --yes
+npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree/v0.1.1 --skill '*' --copy
 ```
 
-Install all seven together: the entry uses relative links to sibling skills. These commands copy the pinned v0.1.1 release into the project. To follow the current default branch instead, use `SunnySunnyOMG/ai-work-methods` as the source. Add `--global` for user-wide installation. Copied skills do not update automatically; back up local edits before installing another version. Options come from the [skills CLI](https://github.com/vercel-labs/skills).
+Requires Node.js **22.20.0+** and npm for this installer only. In an ordinary interactive terminal, select your agents and scope when prompted. When run inside an agent, the installer may detect that host and proceed non-interactively. Review the resulting destinations; add `--agent` to choose explicit targets and `--global` for user scope. `npx --yes` accepts downloading the installer; a trailing installer `--yes` would additionally accept its choices. Install all seven sibling skills together. Copies do not update automatically.
 
-[Installation, updates, and troubleshooting](docs/install.md) include manual copying without Node. Loading these files requires no extra provider API integration; the agent needs its own working runtime. Python 3.9+ is needed only for the optional helpers. The Claude instructions target **Claude Code**; Claude Desktop/Cowork and direct API use have different installation and integration paths.
+No Node or unsupported installer target? Download the release and copy the **seven folders inside `skills/`** into your agent's documented skills directory, preserving their names, references, scripts, and sibling layout. Agent Skills defines a portable format, not one universal installation directory. [Installation guide](docs/install.md) covers target selection, manual installation, updates, and optional host-specific commands. The [skills CLI](https://github.com/vercel-labs/skills/tree/v1.7.0#supported-agents) supports many host destinations; destination support is not proof of runtime behavior in every host.
 
 ## Use
 
-Invoke the installed entry with a real task. In Codex CLI or IDE:
+Give your agent a real task and ask it to use **ai-work**, for example:
 
 ```text
-$ai-work Compare these two proposals and produce a decision memo.
-Use the attached sources, flag contradictions, and deliver the memo as a file.
+Use ai-work to compare these two proposals and deliver a decision memo.
+Use the attached sources and flag contradictions.
 ```
 
-In Claude Code:
+Use the host's own skill invocation or discovery mechanism. If it can read files, it can read `skills/ai-work/SKILL.md` and load only the relevant sibling modules and references. If it cannot load skills or local files, supply the entry and the needed module/reference text in context; this is manual method use, not installed automatic discovery.
 
-```text
-/ai-work Compare these two proposals and produce a decision memo.
-Use the attached sources, flag contradictions, and deliver the memo as a file.
-```
+Optional invocation examples: `$ai-work` in Codex, `/ai-work` in Claude Code. Other hosts use their own syntax and settings. Relevant implicit selection is allowed by the package, but actual selection depends on the host and task. `agents/openai.yaml` is optional host metadata; the core instructions do not depend on it.
 
-Or invoke a focused skill directly. Both hosts can select relevant skills from their discovery descriptions; actual implicit selection depends on the host and task. Claude Code allows both user and model invocation by default. If the skills do not appear, check the installation scope and host settings; see [Codex](https://learn.chatgpt.com/docs/build-skills) and [Claude Code](https://code.claude.com/docs/en/skills) documentation. Other compatible hosts have their own locations and invocation syntax.
-
-For another AI agent, use its supported skill mechanism. If it can read local files, ask it to read `skills/ai-work/SKILL.md` and give it the task, for example: “Reconcile these meeting notes with the original sources, flag changed claims, and deliver a corrected brief.” If it cannot read files, supply the entry and relevant module text in the conversation. This provides context; it does not guarantee automatic discovery or grant tool access.
+No extra provider API integration is required by the package. Your agent needs its own runtime and access to the task materials; Python 3.9+ is needed only for the optional helpers. Desktop/web apps and direct APIs may use upload or integration mechanisms rather than a filesystem skills directory; follow their own instructions.
 
 | Skill | Use it to… |
 | --- | --- |
