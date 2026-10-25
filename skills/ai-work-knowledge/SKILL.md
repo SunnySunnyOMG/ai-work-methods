@@ -1,6 +1,6 @@
 ---
 name: ai-work-knowledge
-description: Use when reusing past context, reconciling conflicting sources, maintaining derived knowledge, or propagating a correction or withdrawal without discarding independently valid material.
+description: Use when reusing past context, reconciling conflicting sources, maintaining derived knowledge, auditing or consolidating an accumulated store of notes, lessons, or rules, or propagating a correction or withdrawal without discarding independently valid material.
 ---
 
 # AI 来源与知识纠正
@@ -11,6 +11,6 @@ description: Use when reusing past context, reconciling conflicting sources, mai
 
 冲突/撤回先定位受影响主张，重查独立支持，修正相关笔记与下游，保留仍有效内容。修了一处不等于所有派生结果已更新。
 
-检索与来源判断读 [source-use.md](references/source-use.md)；撤回、依赖或本地hash检查读 [correction.md](references/correction.md)。脚本只提供一致性与波及范围，不能审核真假或语义影响。
+检索与来源判断读 [source-use.md](references/source-use.md)；撤回、依赖或本地hash检查读 [correction.md](references/correction.md)；审查、去重或精简积累的笔记、经验与规则库读 [memory-maintenance.md](references/memory-maintenance.md)。脚本只提供一致性与波及范围，不能审核真假或语义影响。
 
 输出可复用结论、来源状态和真正未决项；按任务需要简写。原材料与可重建派生结果分开，不把自己的摘要回灌为独立证据。不反向调用入口。
