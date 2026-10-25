@@ -17,7 +17,7 @@ description: Use when a user wants help choosing an AI work approach, designing 
 | AI、程序与人的边界 | [ai-work-intelligence](../ai-work-intelligence/SKILL.md) |
 | 分工、模型、依赖和并行 | [ai-work-orchestration](../ai-work-orchestration/SKILL.md) |
 | 重复流程、恢复和跨应用操作 | [ai-work-workflow](../ai-work-workflow/SKILL.md) |
-| 来源、检索复用和知识纠正 | [ai-work-knowledge](../ai-work-knowledge/SKILL.md) |
+| 来源、检索复用、知识纠正和记忆库整理 | [ai-work-knowledge](../ai-work-knowledge/SKILL.md) |
 | 经验是否值得固化成 Skill | [ai-work-distill](../ai-work-distill/SKILL.md) |
 
 职责重叠时读 [routing.md](references/routing.md)；缺工具、跨专业执行或读取失败时读 [tools-context.md](references/tools-context.md)。每个模块也只读取符合条件的 reference。

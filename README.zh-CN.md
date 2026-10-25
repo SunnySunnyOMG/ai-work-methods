@@ -39,9 +39,9 @@ npx --yes skills@1.7.0 add https://github.com/SunnySunnyOMG/ai-work-methods/tree
 | [ai-work-intelligence](skills/ai-work-intelligence/SKILL.md) | 哪些环节用 AI、程序或人判断 |
 | [ai-work-orchestration](skills/ai-work-orchestration/SKILL.md) | 如何分工、选择模型、安排依赖与并行 |
 | [ai-work-delivery](skills/ai-work-delivery/SKILL.md) | 如何交付并证明结果达到哪一层 |
-| [ai-work-knowledge](skills/ai-work-knowledge/SKILL.md) | 如何保留来源、处理纠正与下游影响 |
+| [ai-work-knowledge](skills/ai-work-knowledge/SKILL.md) | 如何保留来源、处理纠正与下游影响，整理积累的记忆 |
 | [ai-work-distill](skills/ai-work-distill/SKILL.md) | 哪些经验值得固化，怎样优先改善现有流程 |
 
 两个只读脚本检查依赖和同名写入冲突，以及本地来源 hash 和声明的派生关系；不执行任务，不判断语义真假。
 
-方法结合实践案例与 13 份一手外部来源。[验证范围](docs/validation.md)明确记录构造场景与本地文件任务，尚未证明普遍提速、原生自动发现或真实外部系统可靠性。私人聊天不进入公开包。欢迎提交带条件、结果与反例的小案例，见 [贡献说明](CONTRIBUTING.md)。采用 [MIT](LICENSE) 许可。
+方法结合实践案例与 14 份一手外部来源。[验证范围](docs/validation.md)明确记录构造场景与本地文件任务，尚未证明普遍提速、原生自动发现或真实外部系统可靠性。私人聊天不进入公开包。欢迎提交带条件、结果与反例的小案例，见 [贡献说明](CONTRIBUTING.md)。采用 [MIT](LICENSE) 许可。

@@ -30,3 +30,11 @@ Claude Code CLI 2.1.286 was available but not logged in, so no Claude-model revi
 For installation, the pinned skills CLI 1.7.0 installed the published **v0.1.0** into a fresh temporary project with `--agent claude-code --copy --yes`. All seven skills appeared in `.claude/skills/`; SHA256 comparisons of all 30 packaged skill files matched the v0.1.0 release commit. No user-wide installation or authenticated Claude model task was performed. This proves a bounded Claude Code project copy, not native discovery, explicit task behavior, implicit selection, or v0.1.1 installation.
 
 The version in an installation command is not itself evidence of successful public installation of that version. Additional host behavior checks should record host version, installation destination, task input, actual loaded modules, and resulting artifact.
+
+## Memory-maintenance reference
+
+A conditional reference, `ai-work-knowledge/references/memory-maintenance.md`, adds guidance for auditing and consolidating an accumulated store of notes, lessons, or rules: read-only audit first, evidence-based status per entry, itemized edits instead of whole rewrites, recoverable changes, and maintenance output kept out of the searched store. The entry, routing note, and distill lesson decisions gained one pointer each. The pack now has 15 conditional references.
+
+Two constructed non-development scenarios were added (E16 shared customer notes, E17 conflicting assistant preferences plus a request to replace every entry with a one-page summary). One model answered each with the previous pack and with the candidate, reading files only from the given pack. Both versions handled E16 correctly: audit before deletion, archive instead of delete, and verification of pricing claims. On E17 the previous pack treated the newer entry as the likely replacement after a source check; the candidate identified that the older, narrower constraint might still hold, asked the user before deleting it, and refused the whole-store summary replacement. This is one run per condition with inputs written by the same reviewer, not a held-out or statistically meaningful comparison.
+
+The structural validator and all 19 tests passed locally on Python 3.14. No helper changed.

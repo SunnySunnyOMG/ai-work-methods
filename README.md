@@ -40,13 +40,13 @@ No extra provider API integration is required by the package. Your agent needs i
 | [ai-work-intelligence](skills/ai-work-intelligence/SKILL.md) | Separate uncertain judgment from stable program steps |
 | [ai-work-orchestration](skills/ai-work-orchestration/SKILL.md) | Assign responsibility, models, dependencies, and parallel tasks |
 | [ai-work-delivery](skills/ai-work-delivery/SKILL.md) | Deliver an artifact and verify the layer actually achieved |
-| [ai-work-knowledge](skills/ai-work-knowledge/SKILL.md) | Track sources and repair conclusions affected by corrections |
+| [ai-work-knowledge](skills/ai-work-knowledge/SKILL.md) | Track sources, repair conclusions affected by corrections, and audit accumulated memory |
 | [ai-work-distill](skills/ai-work-distill/SKILL.md) | Turn reusable experience into a skill or improve an existing workflow |
 
 Two optional, read-only helpers check [task dependencies and named write conflicts](skills/ai-work-orchestration/scripts/check_plan.py) and [local source hashes and declared downstream dependencies](skills/ai-work-knowledge/scripts/check_sources.py). They neither execute tasks nor establish truth. Each owning skill links the relevant input format.
 
 ## Scope and evidence
 
-The methods combine personal AI-work research with 13 primary external sources. They are conditional guidance, not universal performance claims. [Validation](docs/validation.md) covers constructed regression scenarios, local artifact tasks, and structural checks; it does not establish speedups, native auto-discovery, or live external-system reliability. Raw private conversations are excluded.
+The methods combine personal AI-work research with 14 primary external sources. They are conditional guidance, not universal performance claims. [Validation](docs/validation.md) covers constructed regression scenarios, local artifact tasks, and structural checks; it does not establish speedups, native auto-discovery, or live external-system reliability. Raw private conversations are excluded.
 
 Contribute a small case showing a condition, action, outcome, and counterexample. See [CONTRIBUTING.md](CONTRIBUTING.md). Released under the [MIT license](LICENSE).
